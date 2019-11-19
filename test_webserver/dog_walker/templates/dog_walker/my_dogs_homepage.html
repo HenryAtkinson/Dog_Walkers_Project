@@ -1,5 +1,7 @@
 {% extends "dog_walker/base.html" %}
-
+{% block role %}
+Current Role: Dog Owner
+{% endblock role %}
 {% block navbar %}
 
 <li class="nav-item">
@@ -37,8 +39,8 @@
                 {% for dog in dogs %}
                 <tr>
                     <td><img class="img-thumbnail"
-                             src="{{ dog.image }}"
-                             alt="/static/dogs/default.png" style="height:70px; width:70px;"></td>
+                             src="{{ dog.image.url }}"
+                             alt="Pic of Dog" style="height:70px; width:70px;"></td>
                     <td class="h3">{{ dog.name }}</td>
                     <td class="h3">{{ dog.breed }}</td>
                     <td class="h3">{{ dog.age }}</td>
@@ -54,4 +56,3 @@
     </div>
 </div>
 {% endblock content %}
-

@@ -1,5 +1,7 @@
 {% extends "dog_walker/base.html" %}
-
+{% block role %}
+    Current Role: Dog Owner
+{% endblock role %}
 {% block navbar %}
 <li class="nav-item">
     <a class="nav-link" href="{% url 'dog_walker-my_dogs_homepage' %}">My Dogs</a>

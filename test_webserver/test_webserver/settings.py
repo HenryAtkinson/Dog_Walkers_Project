@@ -31,13 +31,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'a8$5%5e%xm3#gv*51mvw0#1=(c5d3w&5)wvlzbyepf37-xz)0q'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['4dfbe35d.ngrok.io', '127.0.0.1']
+ALLOWED_HOSTS = ['dogwalkers.ngrok.io',
+                 '127.0.0.1',
+                 'localhost']
 
 
 # Application definition
@@ -144,12 +146,12 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-EMAIL_HOST_USER = 'dogwalkersregina@gmail.com'
-EMAIL_HOST_PASSWORD = 'GteA~cP3kCPl'
+EMAIL_HOST_USER = os.environ.get('MAIL_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('MAIL_PASS')
 
-AWS_ACCESS_KEY_ID = 'AKIA5ZNDKAVSZQUC2CXD'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'dog-walkers-files'
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
 
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
@@ -183,6 +185,6 @@ EMAIL_USE_TLS = True
 
 EMAIL_PORT = 587
 
-EMAIL_HOST_USER = 'dogwalkersregina@gmail.com'
+EMAIL_HOST_USER = EMAIL_HOST_USER
 
-EMAIL_HOST_PASSWORD = '%m#J1rZRSnXF'
+EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD

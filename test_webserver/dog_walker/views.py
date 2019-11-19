@@ -6,7 +6,6 @@ from .forms import UserRegistrationForm, IsTrainerForm
 from django.contrib.auth.decorators import login_required
 from .observer_pattern import ConcreteObserver, ConcreteSubject
 from .factory_method import *
-from django.core.files.storage import FileSystemStorage
 from datetime import date, timedelta
 
 success_factory = ConcreteSuccessMessageCreator()
@@ -124,7 +123,7 @@ def add_a_dog(request):
     if request.method == 'POST':
         age = 2019 - int(request.POST.get('dog_birthday')[:4])
         dog_image = request.FILES['dog_image'].name
-        print(os.path.splitext(dog_image)[1])
+        # print(os.path.splitext(dog_image)[1])
         if os.path.splitext(dog_image)[1] == '.png' or os.path.splitext(dog_image)[1] == '.jpg' or  os.path.splitext(dog_image)[1] == '.PNG' or os.path.splitext(dog_image)[1] == '.JPG':
             dog_image = request.FILES['dog_image']
             temp_dict = {
@@ -136,7 +135,7 @@ def add_a_dog(request):
                 'dog_image': dog_image
             }
             Dogs.objects.create(**temp_dict)
-            messages.success(request, mySuccessFactory.createProduct("add_dog").get_message())
+            messages.success(request, success_factory.createProduct("add_dog").get_message())
             return redirect('dog_walker-my_dogs_homepage')
         else:
             temp_dict = {
@@ -147,8 +146,8 @@ def add_a_dog(request):
                 'dog_weight': request.POST.get('dog_weight')
             }
             Dogs.objects.create(**temp_dict)
-            messages.error(request, myErrorFactory.createProduct("not_image").get_message())
-            messages.success(request, mySuccessFactory.createProduct("add_dog").get_message())
+            messages.error(request, error_factory.createProduct("not_image").get_message())
+            messages.success(request, success_factory.createProduct("add_dog").get_message())
             return redirect('dog_walker-my_dogs_homepage')
     return render(request, 'dog_walker/add_a_dog.html', content)
 
@@ -169,7 +168,7 @@ def add_a_poi(request):
         if not (temp_dict['name'] and temp_dict['category'] and temp_dict['description']):
             messages.error(request, error_factory.createProduct("empty_field").get_message())
             invalid = True
-        print('{}{}'.format(request.POST.get('lng'), request.POST.get('lat')))
+        # print('{}{}'.format(request.POST.get('lng'), request.POST.get('lat')))
         if request.POST.get('lng') == '0' or request.POST.get('lat') == '0':
             messages.error(request, error_factory.createProduct("add_poi").get_message())
             invalid = True
@@ -494,7 +493,7 @@ def view_class_detail_dog_trainer(request, class_name):
     if route_object.walking_route_middle_3:
         points.append(route_object.walking_route_middle_3.location)
     points.append(route_object.walking_route_end.location)
-    print(points)
+    # print(points)
     content = {
         'title': 'Dog Trainer Class',
         'bg_image': map_image,
@@ -519,7 +518,7 @@ def view_class_detail_dog_walker(request, instructor, class_name):
     if route_object.walking_route_middle_3:
         points.append(route_object.walking_route_middle_3.location)
     points.append(route_object.walking_route_end.location)
-    print(points)
+    # print(points)
     content = {
         'title': 'Dog Trainer Class',
         'bg_image': map_image,
@@ -533,7 +532,7 @@ def view_class_detail_dog_walker(request, instructor, class_name):
 def dog_trainer_create_a_class(request):
     current_user = request.user
     if request.method == 'POST':
-        print(request.POST.get('class_name'))
+        # print(request.POST.get('class_name'))
         class_dict = {
             'class_name': request.POST.get('class_name'),
             'class_instructor': current_user,

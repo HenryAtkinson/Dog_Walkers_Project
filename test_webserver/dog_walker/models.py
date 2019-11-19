@@ -50,7 +50,6 @@ class Dogs(models.Model):
 
 
 class WalkingRoute(models.Model):
-    # TODO DO THIS
     ROUTE_TYPES = [
         ('Leisure', 'Leisure'),
         ('Training', 'Training')
